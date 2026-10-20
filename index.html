@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secily's Kitty Club</title>
+  <meta name="description" content="Secily's magical Kitty Club: 3D kitties climbing cat towers and playing with yarn, puppy pals, giggles, princesses, baby dolls and more!">
+  <meta name="theme-color" content="#ff8cc6">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+</head>
+<body>
+  <canvas id="scene" aria-hidden="true"></canvas>
+
+  <div id="loader" role="status">
+    <div class="loader-cat">🐱</div>
+    <p>Waking up the kitties…</p>
+  </div>
+
+  <header class="topbar">
+    <a href="#home" class="logo"><span class="paw">🐾</span> <span class="logo-text">Secily's Kitty Club</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#home" title="Home">🏠</a>
+      <a href="#crew" title="Kitty Crew">🐱</a>
+      <a href="#facts" title="Cat Facts">💡</a>
+      <a href="#puppies" title="Puppy Pals">🐶</a>
+      <a href="#giggles" title="Giggle Zone">😂</a>
+      <a href="#princess" title="Princess Palace">👑</a>
+      <a href="#nursery" title="Baby Doll Nursery">🍼</a>
+      <a href="#shows" title="Show Time">📺</a>
+      <a href="#pet" title="Pet the Kitty">💖</a>
+    </nav>
+  </header>
+
+  <div class="fabs">
+    <button class="fab" id="fab-peek" title="Hide the cards and just watch the kitties"><span>👀</span><small>Watch</small></button>
+    <button class="fab" id="fab-yarn" title="Throw a yarn ball!"><span>🧶</span><small>Yarn</small></button>
+    <button class="fab" id="fab-party" title="Kitty dance party!"><span>🪩</span><small>Dance</small></button>
+    <button class="fab" id="fab-sound" title="Sound on/off"><span>🔊</span><small>Sound</small></button>
+  </div>
+
+  <main>
+    <!-- 0 · Welcome -->
+    <section id="home" class="hero" data-zone="0" data-side="center">
+      <div class="card hero-card">
+        <div class="hero-pic">
+          <img src="assets/pink-kitty.png" alt="Sparkle, a fluffy pink kitten with big sparkly eyes, sitting in a glowing garden">
+        </div>
+        <div>
+          <span class="kicker" id="greeting">Hi Secily!</span>
+          <h1>Welcome to <span class="name">Secily's</span> Kitty Club!</h1>
+          <p>This magical meadow is full of kitties who love to climb, pounce and play. Meet <b>Sparkle</b>, our club mascot! Scroll down to visit everybody. 💖</p>
+          <p class="tip">🐾 Tap a kitty to say hi · tap the grass to call one over · press 🧶 to throw yarn!</p>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">Scroll down <span>👇</span></div>
+    </section>
+
+    <!-- 1 · Kitty crew -->
+    <section id="crew" data-zone="1" data-side="left">
+      <div class="card">
+        <span class="kicker">Meet the gang</span>
+        <h2>The Kitty Crew 🐱</h2>
+        <p>These six silly kitties live in the cat towers. Push a button to hear them say hello!</p>
+        <div class="crew-grid">
+          <div class="crew"><div class="swatch" style="--c:#ffffff;--e:#59b8ff"></div><b>Marshmallow</b><span>Loves: naps in sunbeams</span><button class="btn small" data-meow="Marshmallow" data-pitch="1.2">Meow!</button></div>
+          <div class="crew"><div class="swatch" style="--c:#2a2235;--e:#ffcc33"></div><b>Midnight</b><span>Loves: hide and seek</span><button class="btn small" data-meow="Midnight" data-pitch="0.9">Meow!</button></div>
+          <div class="crew"><div class="swatch" style="--c:#f4e4cf;--e:#59b8ff"></div><b>Cocoa</b><span>Loves: climbing to the very top</span><button class="btn small" data-meow="Cocoa" data-pitch="1.05">Meow!</button></div>
+          <div class="crew"><div class="swatch" style="--c:#ffa24c;--e:#5ef08c"></div><b>Ginger</b><span>Loves: chasing yarn</span><button class="btn small" data-meow="Ginger" data-pitch="0.95">Meow!</button></div>
+          <div class="crew"><div class="swatch" style="--c:#c9b6e8;--e:#ffab40"></div><b>Lilac</b><span>Loves: fancy fluffy tails</span><button class="btn small" data-meow="Lilac" data-pitch="1.15">Meow!</button></div>
+          <div class="crew"><div class="swatch" style="--c:#ffc8a8;--e:#3fe0c5"></div><b>Peaches</b><span>Loves: tummy rubs</span><button class="btn small" data-meow="Peaches" data-pitch="1.3">Meow!</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · Cat facts -->
+    <section id="facts" data-zone="2" data-side="right">
+      <div class="card">
+        <span class="kicker">Did you know?</span>
+        <h2>Cool Cat Facts 💡</h2>
+        <p>Tap a card to flip it over and find out!</p>
+        <div class="flip-grid">
+          <button class="flip"><span class="flip-inner"><span class="face front" style="--bg:#ffd3ea">😴<b>How long do cats sleep?</b></span><span class="face back">Cats sleep 12 to 16 hours a day! That's more than half the day!</span></span></button>
+          <button class="flip"><span class="flip-inner"><span class="face front" style="--bg:#e4d8ff">🐱🐱🐱<b>What's a group of kittens called?</b></span><span class="face back">A <b>kindle</b>! A kindle of kittens! 🔥</span></span></button>
+          <button class="flip"><span class="flip-inner"><span class="face front" style="--bg:#d2f7ee">👂<b>How many muscles are in a cat's ear?</b></span><span class="face back">32 muscles in each ear! That's how they turn their ears like little satellite dishes.</span></span></button>
+          <button class="flip"><span class="flip-inner"><span class="face front" style="--bg:#fff1b8">🍭<b>Can cats taste candy?</b></span><span class="face back">Nope! Cats can't taste sweet things at all.</span></span></button>
+          <button class="flip"><span class="flip-inner"><span class="face front" style="--bg:#ffe0cc">👃<b>What's special about a cat's nose?</b></span><span class="face back">Every cat's nose has its own bumpy pattern, just like your fingerprint!</span></span></button>
+          <button class="flip"><span class="flip-inner"><span class="face front" style="--bg:#d8ecff">🦘<b>How high can cats jump?</b></span><span class="face back">Up to about 6 times their own length! Boing!</span></span></button>
+          <button class="flip"><span class="flip-inner"><span class="face front" style="--bg:#ffd3ea">👀<b>What color are baby kitten eyes?</b></span><span class="face back">All kittens are born with blue eyes! They can change color as they grow up.</span></span></button>
+          <button class="flip"><span class="flip-inner"><span class="face front" style="--bg:#e4d8ff">🦒<b>Who walks like a cat?</b></span><span class="face back">Camels and giraffes! They all step both right feet, then both left feet.</span></span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · Puppies -->
+    <section id="puppies" data-zone="3" data-side="left">
+      <div class="card">
+        <span class="kicker">Woof woof!</span>
+        <h2>Puppy Pals 🐶</h2>
+        <p>The kitties have some doggy friends! (And Boss the cat likes to sit on top of the doghouse. Silly Boss!)</p>
+        <div class="crew-grid three">
+          <div class="crew"><div class="swatch dog" style="--c:#e8b15e;--e:#3b2414"></div><b>Biscuit</b><span>Loves: fetch!</span><button class="btn small teal" data-woof="Biscuit" data-pitch="0.9">Woof!</button></div>
+          <div class="crew"><div class="swatch dog spots" style="--c:#ffffff;--e:#3b2414"></div><b>Pepper</b><span>Loves: zoomies</span><button class="btn small teal" data-woof="Pepper" data-pitch="1">Woof!</button></div>
+          <div class="crew"><div class="swatch dog" style="--c:#9a6b4a;--e:#3b2414"></div><b>Peanut</b><span>Loves: snacks</span><button class="btn small teal" data-woof="Peanut" data-pitch="1.4">Yip!</button></div>
+        </div>
+        <h3>Doggy Facts</h3>
+        <ul class="facts-list">
+          <li>👃 A dog's nose can smell thousands of times better than yours!</li>
+          <li>🐾 Dogs sweat through their paws.</li>
+          <li>⚪ Dalmatian puppies are born all white. Their spots come later!</li>
+          <li>🎶 A Basenji dog doesn't bark. It yodels!</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4 · Giggles -->
+    <section id="giggles" data-zone="4" data-side="right">
+      <div class="card">
+        <span class="kicker">Ha ha ha!</span>
+        <h2>The Giggle Zone 😂</h2>
+        <p>Pickles (the green cat in sunglasses) runs the trampoline. Can you spot a kitty doing a flip?</p>
+        <div class="joke-box">
+          <p class="joke-q" id="joke-q">Why did the cat sit on the computer?</p>
+          <p class="joke-a" id="joke-a" hidden>To keep an eye on the mouse!</p>
+          <div class="row">
+            <button class="btn" id="joke-reveal">Tell me! 🤔</button>
+            <button class="btn lav" id="joke-next">Next joke ➡️</button>
+          </div>
+        </div>
+        <div class="gen-box">
+          <h3>What's your silly kitty name?</h3>
+          <p class="gen-out" id="silly-out">Press the button…</p>
+          <button class="btn sun" id="silly-btn">Make a silly name! 🤪</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Princess -->
+    <section id="princess" data-zone="5" data-side="left">
+      <div class="card royal">
+        <span class="kicker">By royal order</span>
+        <h2>Princess Palace 👑</h2>
+        <p>Welcome to the castle, Your Highness! Princess Sprinkles, Duchess Daisy and Lady Luna are having a royal parade.</p>
+        <div class="gen-box">
+          <h3>Find your royal name!</h3>
+          <div class="royal-out" id="royal-out">
+            <p class="royal-title">Princess Secily</p>
+            <p class="royal-detail">Press the crown button to begin…</p>
+          </div>
+          <button class="btn" id="crown-btn">✨ Crown me! ✨</button>
+        </div>
+        <h3>Royal Rules of the Kitty Kingdom</h3>
+        <ol class="rules">
+          <li>Every kitty gets a crown on Fridays.</li>
+          <li>Twirling is allowed in all hallways.</li>
+          <li>Hugs are the official royal greeting.</li>
+          <li>Princess Secily is always in charge of the sparkles.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6 · Nursery -->
+    <section id="nursery" data-zone="6" data-side="right">
+      <div class="card">
+        <span class="kicker">Shhh… babies sleeping</span>
+        <h2>Baby Doll Nursery 🍼</h2>
+        <p>Help take care of the baby doll! When you finish everything, the baby goes to sleep.</p>
+        <label class="baby-name">Baby's name: <input id="baby-name" maxlength="20" value="Baby Rosie"></label>
+        <div class="care-grid">
+          <button class="care" data-care="feed">🍼<span>Bottle</span></button>
+          <button class="care" data-care="diaper">🧷<span>Fresh diaper</span></button>
+          <button class="care" data-care="bath">🛁<span>Bubble bath</span></button>
+          <button class="care" data-care="dress">👗<span>Cute outfit</span></button>
+          <button class="care" data-care="sing">🎵<span>Lullaby</span></button>
+          <button class="care" data-care="tuck">🌙<span>Tuck in</span></button>
+        </div>
+        <div class="meter"><div class="meter-fill" id="care-fill"></div></div>
+        <p class="care-msg" id="care-msg">Pick something to do!</p>
+        <button class="btn small lav" id="care-reset" hidden>Baby woke up! Play again 🔁</button>
+      </div>
+    </section>
+
+    <!-- 7 · Shows -->
+    <section id="shows" data-zone="7" data-side="left">
+      <div class="card">
+        <span class="kicker">Lights, camera, MEOW!</span>
+        <h2>Show Time 📺</h2>
+        <p>Star is dancing on stage at <b>The Secily Show</b>! Start a dance party and every kitty dances!</p>
+        <button class="btn big" id="party-btn">🪩 Kitty Dance Party! 🪩</button>
+        <div class="gen-box">
+          <h3>My Favorite Shows</h3>
+          <form id="show-form" class="row">
+            <input id="show-input" maxlength="40" placeholder="Type a show you love…" aria-label="Favorite show">
+            <button class="btn small" type="submit">Add ⭐</button>
+          </form>
+          <ul class="show-list" id="show-list"></ul>
+        </div>
+        <div class="gen-box">
+          <h3>Make up a new cartoon!</h3>
+          <p class="gen-out" id="cartoon-out">Press the button for a brand-new show idea…</p>
+          <button class="btn teal" id="cartoon-btn">🎬 New cartoon idea</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · Pet the kitty -->
+    <section id="pet" data-zone="8" data-side="center">
+      <div class="card pet-card">
+        <span class="kicker">Last stop!</span>
+        <h2>Pet the Kitty 💖</h2>
+        <p>Pet Sparkle to fill up the Purr-O-Meter!</p>
+        <button class="pet-kitty" id="pet-kitty" aria-label="Pet Sparkle">
+          <img src="assets/pink-kitty.png" alt="Sparkle the pink kitten">
+        </button>
+        <div class="meter purr"><div class="meter-fill" id="purr-fill"></div></div>
+        <p class="care-msg" id="purr-msg">Purr-O-Meter: 0%</p>
+        <p class="bye">Thanks for visiting the Kitty Club, Secily! The kitties say: <b>you're PURR-fect!</b> 🌈</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>Made with 💖 for Secily Howell · secily.howell.club</footer>
+
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
